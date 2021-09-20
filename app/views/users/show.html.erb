@@ -1,0 +1,13 @@
+<h1>My User Profile</h1>
+<p><strong>Username: </strong><%= @user.username %></p>
+<p><strong>Email: </strong><%= @user.email %></p>
+
+<%= gravatar_for @user, size: 150 %>
+
+<h3>My Articles</h3>
+<%= render 'articles/list_articles' %>
+
+<p>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Home', root_path %>
+</p>
