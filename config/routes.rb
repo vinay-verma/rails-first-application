@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about'
   resources :articles
   get 'signup', to: 'users#new'
-  resources :users, only: %i[create]
+  resources :users, except: %i[new]
 end
