@@ -56,10 +56,10 @@ class ArticlesController < ApplicationController
   end
 
   def same_user?
-    unless current_user == @article.user
-      flash[:alert] = 'You can edit your own articles only.'
-      redirect_to @article
-    end
+    return if current_user == @article.user || admin_user?
+
+    flash[:alert] = 'You can edit/delete your own articles only.'
+    redirect_to @article
   end
 
 end

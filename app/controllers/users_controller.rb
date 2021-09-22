@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[edit show update destroy]
-  before_action :require_user?, except: %i[index show]
+  before_action :require_user?, except: %i[new index create]
   before_action :same_user, only: %i[edit update destroy]
 
   def index
@@ -20,8 +20,9 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     if @user.save
+      session[:user_id] = @user.id
       flash[:notice] = "Welcome to Alpha Blog #{@user.username}, you have successfully signed up."
-      redirect_to users_path
+      redirect_to @user
     else
       render 'new'
     end
@@ -54,10 +55,10 @@ class UsersController < ApplicationController
   end
 
   def same_user
-    unless current_user == @user
-      flash[:alert] = "You are not authorised to modify other user's profile"
-      redirect_to @user
-    end
+    return if current_user == @user || admin_user?
+
+    flash[:alert] = "You are not authorised to edit/delete other user's profile"
+    redirect_to @user
   end
 
 end
