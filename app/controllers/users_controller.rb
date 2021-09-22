@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[edit show update]
+  before_action :set_user, only: %i[edit show update destroy]
   before_action :require_user?, except: %i[index show]
-  before_action :same_user, only: %i[edit update]
+  before_action :same_user, only: %i[edit update destroy]
 
   def index
     @users = User.paginate(page: params[:page], per_page: 5)
@@ -34,6 +34,13 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @user.destroy
+    flash[:notice] = 'User and associated articles are removed successfully'
+    session[:user_id] = nil
+    redirect_to login_path
   end
 
   private
