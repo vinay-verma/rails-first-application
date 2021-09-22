@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[edit show update]
+  before_action :require_user?, except: %i[index show]
+  before_action :same_user, only: %i[edit update]
 
   def index
     @users = User.paginate(page: params[:page], per_page: 5)
@@ -42,6 +44,13 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def same_user
+    unless current_user == @user
+      flash[:alert] = "You are not authorised to modify other user's profile"
+      redirect_to @user
+    end
   end
 
 end
