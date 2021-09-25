@@ -10,4 +10,12 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  def mock_admin_user
+    User.create(username: 'admin', email: 'admin@test.com', password: 'password', admin: true)
+  end
+
+  def log_in_as(user, password = 'password')
+    post '/login', params: { session: { username: user.username, password: password } }
+  end
 end
