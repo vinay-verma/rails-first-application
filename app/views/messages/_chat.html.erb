@@ -1,0 +1,29 @@
+<div class="row mb-2">
+  <% unless current_user == message.user %>
+    <div class="col-md-1 align-self-center">
+      <%= gravatar_for message.user, size: 30 %>
+    </div>
+  <% end %>
+  <div class="col-md-11">
+    <div class="card chat-message <%= class_names(
+                                        'bg-info' => current_user == message.user,
+                                        'bg-light' => current_user != message.user) %>">
+      <div class="card-body">
+        <span>
+          <%= message.message %>
+        </span>
+        <div class="chat-footer">
+          <% if current_user != message.user %>
+            <%= message.user.username %>,
+        <% end %>
+          <%= time_ago_in_words(message.created_at) %> ago
+        </div>
+      </div>
+    </div>
+  </div>
+  <% if current_user == message.user %>
+    <div class="col-md-1 align-self-center">
+      <%= gravatar_for message.user, size: 30 %>
+    </div>
+  <% end %>
+</div>

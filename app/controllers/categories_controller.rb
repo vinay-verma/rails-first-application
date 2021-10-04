@@ -20,7 +20,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.create(category_params)
+    @category = Category.new(category_params)
     if @category.save
       flash[:notice] = 'Category successfully created'
       redirect_to @category

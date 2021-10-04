@@ -41,6 +41,7 @@ body {
 
 #sticky-footer {
   flex-shrink: none;
+  display: flex;
 }
 
 .flickr_pagination {
@@ -74,3 +75,23 @@ body {
   margin-right: 1em; }
 .flickr_pagination .next_page {
   margin-left: 1em; }
+
+.chat-button {
+  position: fixed;
+  right: 2em;
+  bottom: 1em;
+}
+
+.chat-message {
+  border-radius: 10px !important;
+
+  .card-body {
+    padding: 0.5rem !important;
+  }
+
+  .chat-footer {
+    font-size: small;
+    text-align: right;
+    color: grey;
+  }
+}

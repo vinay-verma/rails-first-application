@@ -1,0 +1,6 @@
+<%= form_with url: messages_path, method: :post, class: "input-group mb-3 rounded", local: true do |f| %>
+  <%= f.text_area :message, class: "form-control shadow rounded", placeholder: "" %>
+  <%= button_tag( :class => "btn btn-dark shadow") do %>
+    <i class="bi bi-arrow-right-square-fill"></i>
+  <% end %>
+<% end %>
