@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include JSONAPI::ActsAsResourceController
 
   helper_method :current_user, :logged_in?, :admin_user?
 
